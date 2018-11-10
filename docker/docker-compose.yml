@@ -1,0 +1,130 @@
+version: '3.7'
+
+# RUN: docker-compose up --build -d
+
+services:
+
+  inca-logger:
+    image: umputun/docker-logger
+    container_name: "logger"
+    hostname: "logger"
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    environment:
+      - LOG_FILES=true
+      - LOG_SYSLOG=false
+      - EXCLUDE=monit,docker-logger
+      - MAX_FILES=10
+      - MAX_SIZE=50
+      - MAX_AGE=20
+      - DEBUG=false
+      - TIME_ZONE=UTC
+    volumes:
+      - ./logs:/srv/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jstack
+      
+  jstack-nginx-backend:
+    image: nginx:stable
+    container_name: jstack-nginx-backend
+    restart: always
+    volumes:
+      - ./compose/nginx/backend/html/awesomekb:/usr/share/nginx/html/awesomekb.jstack.com
+      - ./compose/nginx/backend/nginx.conf:/etc/nginx/nginx.conf
+      - ./compose/nginx/backend/awesomekb.conf:/etc/nginx/conf.d/awesomekb.conf
+    networks:
+      - jstack
+
+  inca-authelia:
+    image: clems4ever/authelia:latest
+    container_name: inca-authelia
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    restart: always
+    volumes:
+      - ./compose/authelia/config.yml:/etc/authelia/config.yml:ro
+    depends_on:
+      - inca-redis
+      - jstack-ldap
+    networks:
+      - jstack
+      
+  jstack-nginx-portal:
+    image: nginx:alpine
+    volumes:
+      - ./compose/nginx/portal/nginx.conf:/etc/nginx/nginx.conf
+      - ./compose/nginx/portal/ssl:/etc/ssl
+      - ./compose/nginx/portal/.htpasswd:/usr/share/nginx/.htpasswd
+    ports:
+      - "443:443"
+    networks:
+      - jstack
+
+  jstack-ldap:
+    image: osixia/openldap
+    container_name: jstack-ldap
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 1024
+    environment:
+      LDAP_TLS: 'true'
+      LDAP_ORGANISATION: "Jaguar Stack"
+      LDAP_DOMAIN: "jstack.com"
+      LDAP_ADMIN_PASSWORD: "password"
+    volumes:
+      - /var/lib/ldap
+      - /etc/ldap/slapd.d
+      - /container/service/slapd/assets/certs/
+    depends_on:
+      - inca-logger
+    networks:
+      - jstack
+
+  jstack-ldap-admin:
+    image: osixia/phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "jstack-ldap"
+    depends_on:
+      - inca-logger
+      - jstack-ldap
+    networks:
+      - jstack
+
+  inca-redis:
+    image: redis:4.0-alpine
+    command: redis-server --requirepass authelia
+    networks:
+      - jstack
+      
+  smtp:
+    image: schickling/mailcatcher
+    networks:
+      - jstack
+      
+  inca-mongo:
+    image: mongo:3.4
+    command: mongod --auth
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=authelia
+      - MONGO_INITDB_ROOT_PASSWORD=authelia
+    depends_on:
+      - inca-logger
+    ports:
+      - "27017:27017"
+    networks:
+      - jstack
+      
+  httpbin:
+    image: citizenstig/httpbin
+    networks:
+      - jstack
+
+networks:
+  jstack:
+    driver: bridge

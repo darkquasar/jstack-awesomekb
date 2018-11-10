@@ -1,0 +1,34 @@
+# LDIF Export for dc=jstack,dc=com
+# Admin: cn=admin,dc=jstack,dc=com | pass: "password"
+
+version: 1
+
+# Entry 3: ou=groups,dc=jstack,dc=com
+dn: ou=groups,dc=jstack,dc=com
+objectclass: organizationalUnit
+objectclass: top
+ou: groups
+
+# Entry 4: cn=admin,ou=groups,dc=jstack,dc=com
+dn: cn=admin,ou=groups,dc=jstack,dc=com
+cn: admin
+member: cn=jaguar01,ou=users,dc=jstack,dc=com
+objectclass: groupOfNames
+objectclass: top
+
+# Entry 5: ou=users,dc=jstack,dc=com
+dn: ou=users,dc=jstack,dc=com
+objectclass: organizationalUnit
+objectclass: top
+ou: users
+
+# Entry 6: cn=jaguar01,ou=users,dc=jstack,dc=com
+# PASSWORD: "password"
+dn: cn=jaguar01,ou=users,dc=jstack,dc=com
+cn: jaguar01
+mail: jaguar01@authelia.com
+objectclass: inetOrgPerson
+objectclass: top
+sn: Jaguar Hunter 01
+userpassword: {CRYPT}$6$rounds=500000$jgiCMRyGXzoqpxS3$w2pJeZnnH8bwW3zzvoMWt
+ TRfQYsHbWbD/hquuQ5vUeIyl9gdwBIt6RWk2S6afBA0DPakbeWgD/4SZPiS0hYtU/

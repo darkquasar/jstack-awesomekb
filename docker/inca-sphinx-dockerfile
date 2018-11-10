@@ -1,0 +1,36 @@
+# Author: Diego Perez (@darkquasar)
+# License: GPL-3.0
+# JSTACK Version: 0.0.1
+# Description: Dockerfile for sphinx with "markdown to rst" (m2r) plugin and "read the docs" theme in python3
+
+FROM phusion/baseimage:0.11
+LABEL maintainer="Diego Perez (@darkquasar)"
+LABEL description="JaguarStack Sphinx Document Creator"
+ENV DEBIAN_FRONTEND noninteractive
+
+# *** Configuring Environment Variables ***
+
+# *** Preparing Base Image ***
+## vim, curl come installed by default with phusion/baseimage
+RUN apt-get update -qq --no-install-recommends \
+    && apt-get install -qqy \
+       python3-setuptools \
+       python3-dev \
+       build-essential \
+       python3-pip \
+       python3-sphinx \
+       texlive \
+       texlive-latex-extra \
+       pandoc \
+    && pip3 install m2r \
+    && pip3 install sphinx_rtd_theme \
+    && pip3 install sphinx-markdown-tables \
+    && apt-get -qy clean autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+# *** Creating Scripts Directory ***
+RUN mkdir docs
+WORKDIR /docs
+VOLUME /docs
+
+CMD ["/bin/bash"]
