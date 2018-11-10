@@ -51,20 +51,37 @@ run_kb() {
 }
 
 replace_domain() {
+
   # This function will look into the nginx folder and replace any files 
   # containing the default "jstack.com" domain with the domain of your choosing.
   # Useful when you want to test jstack-awesomekb with your own domain or an 
   # AWS default one for example. 
+
+  # Determining whether the script is being sourced or run in new shell
+  # in order to assign $SCRIPTPATH
+  if [ ! $0 = $BASH_SOURCE ]; then
+    SCRIPTPATH="$( cd "$(dirname "$BASH_SOURCE")" ; pwd -P )"
+  else
+    SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+  fi
   
-  find ./docker/compose/nginx -type f -print0 | xargs -0 sed -i "s/jstack.com/$1/g"
-  find ./docker/compose/authelia -type f -print0 | xargs -0 sed -i "s/jstack.com/$1/g"
-  sed -i "s/awesomekb.jstack.com/awesomekb.$1/g" ./docker/docker-compose.yml
+  find $SCRIPTPATH/docker/compose/nginx -type f -print0 | xargs -0 sed -i "s/jstack.com/$1/g"
+  find $SCRIPTPATH/docker/compose/authelia -type f -print0 | xargs -0 sed -i "s/jstack.com/$1/g"
+  sed -i "s/awesomekb.jstack.com/awesomekb.$1/g" $SCRIPTPATH/docker/docker-compose.yml
   
 }
 
 generate_certs() {
 
-  portal_serv_certpath=docker/compose/nginx/portal/ssl
+  # Determining whether the script is being sourced or run in new shell
+  # in order to assign $SCRIPTPATH
+  if [ ! $0 = $BASH_SOURCE ]; then
+    SCRIPTPATH="$( cd "$(dirname "$BASH_SOURCE")" ; pwd -P )"
+  else
+    SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+  fi
+  
+  portal_serv_certpath=$SCRIPTPATH/docker/compose/nginx/portal/ssl
 
   # generate the private key
   openssl genrsa -out $portal_serv_certpath/server.key 4096
@@ -208,4 +225,8 @@ elif [ $1 = "removecontainers" ]; then
 
   removecontainers
 
+elif [ $1 = "gen-certs" ]; then
+
+  generate_certs
+  
 fi
