@@ -44,7 +44,9 @@ generate_documentation() {
 
 run_kb() {
 
-  generate_documentation awesomekb.jstack.com
+  # Note: Pass in the name of the backend virtual server 
+  # to this function, ex. "awesomekb.jstack.com"
+  generate_documentation $1
 
   # 3. Run the KB stack
   cd docker && docker-compose up --build
@@ -94,8 +96,12 @@ generate_certs() {
 
 deploy_all() {
 
+  # NOTE: This function will expect a value for the backend virtual
+  # server that you want to run. Ideally it should match the name of
+  # your site, ex. "awesomekb.jstack.com"
+  
   # Let's grab the public DNS name of the EC2 instance
-  printf "\n[J-Stack-AwesomeKB] Grabbing your public DNS\n"
+  printf "\n[J-Stack-AwesomeKB] Grabbing your AWS public DNS\n"
   publicdns=$(curl -s http://169.254.169.254/latest/meta-data/public-hostname)
   publicipv4=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
   
@@ -104,6 +110,9 @@ deploy_all() {
   
   printf "\n[J-Stack-AwesomeKB] Fixing environment so that $publicdns becomes your domain name\n"
   replace_domain $publicdns
+  
+  printf "\n[J-Stack-AwesomeKB] Launching AwesomeKB stack with docker-compose\n"
+  run_kb $publicdns
   
   printf '\n[J-Stack-AwesomeKB] Done!, Now please reboot this instance so that we can apply some changes. Then in the host you are using to access the site from (were you launch your browser from) add these to your hosts file:\n\n%b login.%b \n%b ldapadmin.%b \n%b mailcatcher.%b \n%b awesomekb.%b\n\n' $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns
 
@@ -198,7 +207,7 @@ if [ $1 = "install-prerequisites" ]; then
   
 elif [ $1 = "run" ]; then
 
-  run_kb
+  run_kb $2
   
 elif [ $1 = "replace-domain" ]; then
   
