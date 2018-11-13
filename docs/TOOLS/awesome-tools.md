@@ -1,10 +1,9 @@
-:Authors: - Diego Perez
-          - (@darkquasar)
+:Authors: 
+  * Diego Perez (@darkquassar)
 
  .. toctree::
     :maxdepth: 3
     :caption: Resources
-    :name: Resources
 
 # Curated List of Awesome Tools!
 
@@ -15,8 +14,6 @@ This is an example of a MarkDown file that gets converted automagically to .rst 
 - **Hack the Box** (lab setup to test your red teaming and pentesting skills): https://www.hackthebox.eu/
 - **BYOB**, create your Own Botnet. A fully integrated botnet in Python with the ability to load modules in-memory and a simple commandline: https://github.com/colental/byob
 - **RunDotNetDLL32**, a tool to load .NET functions without using PowerShell: https://github.com/0xbadjuju/rundotnetdll32. An explanation follows (out of ![this blog post](https://blog.netspi.com/executing-net-methods-rundotnetdll32/)): 
-
-::
 
     Below is a basic example command showing how to use PowerShell to load the .NET DLL WheresMyImplant.dll so that the DumpSAM() function can be executed to recover local password hashes.
 
@@ -46,6 +43,7 @@ This is an example of a MarkDown file that gets converted automagically to .rst 
     [+] Running as SYSTEM
     Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
     Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    
 
 - **WhereIsMyImplant**, a Bring Your Own Land Toolkit that Doubles as a WMI Provider. You can do things like easily inject shellcode, inject dll, inject exe, spawn a command shell, create Empire client, etc. It can be either executed via WMI or via Assembly.Reflection from Powershell: https://github.com/0xbadjuju/WheresMyImplant
 

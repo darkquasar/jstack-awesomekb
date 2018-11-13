@@ -1,5 +1,5 @@
-:Authors: - Diego Perez
-          - (@darkquasar)
+:Authors: 
+  * Diego Perez (@darkquassar)
     
  .. toctree::
     :maxdepth: 3

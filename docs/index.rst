@@ -13,14 +13,7 @@ AWESOMEKB TABLE OF CONTENTS
     :name: OFFSEC
     
     OFFSEC 101 - Recon <OFFSEC/recon101>
-    
- .. toctree::
-    :maxdepth: 3
-    :caption: Threat Hunting Lab
-    :name: THL
-    
-    Random Notes on ELK/KAFKA/RABBITMQ <THL/ELKOps01>
-    
+        
  .. toctree::
     :maxdepth: 3
     :caption: Resources

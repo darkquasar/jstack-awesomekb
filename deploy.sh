@@ -49,7 +49,7 @@ run_kb() {
   generate_documentation $1
 
   # 3. Run the KB stack
-  cd docker && docker-compose up --build
+  cd docker && docker-compose up --build -d
 }
 
 replace_domain() {
