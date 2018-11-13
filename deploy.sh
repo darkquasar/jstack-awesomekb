@@ -107,20 +107,20 @@ deploy_all() {
   PURPLE='\033[0;35m'
   
   # Let's grab the public DNS name of the EC2 instance
-  printf "\n[J-Stack-AwesomeKB] Grabbing your AWS public DNS\n"
+  printf "\n'${GREEN}'[J-Stack-AwesomeKB]'${NC}' Grabbing your AWS public DNS\n"
   publicdns=$(curl -s http://169.254.169.254/latest/meta-data/public-hostname)
   publicipv4=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
   
-  printf "\n[J-Stack-AwesomeKB] Installing pre-requisites\n"
+  printf "\n'${GREEN}'[J-Stack-AwesomeKB]'${NC}' Installing pre-requisites\n"
   install_prerequisites
   
-  printf "\n[J-Stack-AwesomeKB] Fixing environment so that $publicdns becomes your domain name\n"
+  printf "\n'${GREEN}'[J-Stack-AwesomeKB]'${NC}' Fixing environment so that $publicdns becomes your domain name\n"
   replace_domain $publicdns
   
-  printf "\n[J-Stack-AwesomeKB] Launching AwesomeKB stack with docker-compose\n"
+  printf "\n'${GREEN}'[J-Stack-AwesomeKB]'${NC}' Launching AwesomeKB stack with docker-compose\n"
   run_kb $publicdns
   
-  printf '\n[J-Stack-AwesomeKB] Done!, Now please reboot this instance so that we can apply some changes. Then in the host you are using to access the site from (were you launch your browser from) add these to your hosts file:\n\n'${GREEN}'%b '${PURPLE}'login.%b \n'${GREEN}'%b '${PURPLE}'ldapadmin.%b \n'${GREEN}'%b '${PURPLE}'mailcatcher.%b \n'${GREEN}'%b '${PURPLE}'awesomekb.%b\n\n'${NC}'' $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns
+  printf '\n'${GREEN}'[J-Stack-AwesomeKB]'${NC}' Done!, Now please reboot this instance so that we can apply some changes. Then in the host you are using to access the site from (were you launch your browser from) add these to your hosts file:\n\n'${GREEN}'%b '${PURPLE}'login.%b \n'${GREEN}'%b '${PURPLE}'ldapadmin.%b \n'${GREEN}'%b '${PURPLE}'mailcatcher.%b \n'${GREEN}'%b '${PURPLE}'awesomekb.%b\n\n'${NC}'' $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns
 
 }
 
