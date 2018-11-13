@@ -70,7 +70,7 @@ replace_domain() {
   find $SCRIPTPATH/docker/compose/nginx -type f -print0 | xargs -0 sed -i "s/jstack.com/$1/g"
   find $SCRIPTPATH/docker/compose/authelia -type f -print0 | xargs -0 sed -i "s/jstack.com/$1/g"
   sed -i "s/awesomekb.jstack.com/awesomekb.$1/g" $SCRIPTPATH/docker/docker-compose.yml
-  
+  sed -i "s/compose\/nginx\/backend\/html\/awesomekb/compose\/nginx\/backend\/html\/awesomekb.$1/g" $SCRIPTPATH/docker/docker-compose.yml
 }
 
 generate_certs() {
