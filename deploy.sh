@@ -100,6 +100,12 @@ deploy_all() {
   # server that you want to run. Ideally it should match the name of
   # your site, ex. "awesomekb.jstack.com"
   
+  # Colours
+  RED='\033[0;31m'
+  NC='\033[0m' # No Color
+  GREEN='\033[0;32m'
+  PURPLE='\033[0;35m'
+  
   # Let's grab the public DNS name of the EC2 instance
   printf "\n[J-Stack-AwesomeKB] Grabbing your AWS public DNS\n"
   publicdns=$(curl -s http://169.254.169.254/latest/meta-data/public-hostname)
@@ -114,7 +120,7 @@ deploy_all() {
   printf "\n[J-Stack-AwesomeKB] Launching AwesomeKB stack with docker-compose\n"
   run_kb $publicdns
   
-  printf '\n[J-Stack-AwesomeKB] Done!, Now please reboot this instance so that we can apply some changes. Then in the host you are using to access the site from (were you launch your browser from) add these to your hosts file:\n\n%b login.%b \n%b ldapadmin.%b \n%b mailcatcher.%b \n%b awesomekb.%b\n\n' $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns
+  printf '\n[J-Stack-AwesomeKB] Done!, Now please reboot this instance so that we can apply some changes. Then in the host you are using to access the site from (were you launch your browser from) add these to your hosts file:\n\n'${GREEN}'%b '${PURPLE}'login.%b \n'${GREEN}'%b '${PURPLE}'ldapadmin.%b \n'${GREEN}'%b '${PURPLE}'mailcatcher.%b \n'${GREEN}'%b '${PURPLE}'awesomekb.%b\n\n'${NC}'' $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns $publicipv4 $publicdns
 
 }
 
