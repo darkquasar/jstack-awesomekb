@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'DQ-AwesomeKB'
-copyright = '2018, Diego Perez (@darkquasar)'
+copyright = '2018, Diego Perez (@darkquassar)'
 author = 'Diego Perez (@darkquasar)'
 
 # The version info for the project you're documenting, acts as replacement for
