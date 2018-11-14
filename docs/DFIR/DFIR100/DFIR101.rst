@@ -20,7 +20,11 @@ Concepts
 
     A good mnemonic is **PICERL**: Preparation, Identification (Analysis and Scoping), Containment (Intel Development too), Eradication, Recovery, Lessons Learned.
 
-One of the main problems organizations face is to go from *identification and scoping* to *eradication* when it comes to active intruders in their networks. Companies with no defined IR framework and playbooks usually go for the easy solution: pulling the plug. However, this is the wrong approach. You miss the opportunity to fully understand **what** the attacker is doing, **where** it has been and **how** it behaves in your network. Instead of "pulling the plug" we should aim to perform **"Active Defense"** (full scale network/host monitoring, canaries, honeypots, data decoy, bit mangling, network segmentation), that is, your responder's tactics adapt to the adversary as the attack progresses. Defenders shouldn't think in graphs, they should think topologically
+One of the main problems organizations face is to go from *identification and scoping* to *eradication* when it comes to active intruders in their networks. Companies with no defined IR framework and playbooks usually go for the easy solution: pulling the plug. However, this is the wrong approach. You miss the opportunity to fully understand **what** the attacker is doing, **where** it has been and **how** it behaves in your network. Instead of "pulling the plug" we should aim to perform **"Active Defense"** (full scale network/host monitoring, canaries, honeypots, data decoy, bit mangling, network segmentation), that is, your responder's tactics adapt to the adversary as the attack progresses. 
+
+ .. note::
+ 
+    Defenders shouldn't think in graphs, they should think topologically
 
 In IR, you need to aim to be "close enough" to certainty rather than cientifically exact. You may be wrong later, but by its very concept, IR means you will be defining *areas* of risk and move within a **spectrum of certainty**.
 
@@ -57,7 +61,7 @@ Risk
 Risk
  it is comprised of **threat, vulnerability and consequence (impact)**.
  Risk is commonly defined as threat times vulnerability times consequence. This formula applies to anything that could be exposing you to danger, but when applied to cybersecurity—the unique risks individuals and businesses face as a result of using interconnected technological systems—it provides us with a great deal of insight on risk mitigation.
- Source: `Cybersecurity Risk: A Thorough Definition <https://www.bitsighttech.com/blog/cybersecurity-risk-thorough-definition>_`
+ Source: Cybersecurity Risk: A Thorough Definition https://www.bitsighttech.com/blog/cybersecurity-risk-thorough-definition
 
  .. note:: Threat is composed of **intent**, **oportunity** and **capability**
  
