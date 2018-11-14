@@ -9,10 +9,6 @@
 Incident Response 101
 =====================
 
- .. note:: 
-    
-    Testing 222
-
 Concepts
 --------
 
