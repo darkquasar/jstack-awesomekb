@@ -166,16 +166,22 @@ git_pull_cron() {
   repo=git@github.com:$1
   repo_name=$(echo $repo | grep -Pio "(?<=\/).*")
   target_folder=docsbuild-tmp
-    
-  if [ ! -d "$target_folder" ]; then
   
-    # $2 name of the html virtual server in backend
-    rm -rf docker/compose/nginx/backend/html/$2
-    rm -rf docs/*
-
+  # If the target_folder doesn't exist, let's clone the repo for the first time
+  if [ ! -d "$target_folder" ]; then
+    
+    # Cloning the repo
     git clone $repo $target_folder
+    
+    # $2 name of the html virtual server in backend
+    rm -rf $SCRIPTPATH/docker/compose/nginx/backend/html/$2
+    rm -rf $SCRIPTPATH/docs/*
+
+    # Copying the updated contents into our current /docs folder
     cp -r $target_folder/docs/* docs
   
+  # Else, repo with documentation has been already cloned
+  # only an update needed (git pull)
   else
   
     # Update tmp repo
@@ -185,10 +191,20 @@ git_pull_cron() {
     gp=$(git pull | grep -io "up to date")
     
     if [ ! "$gp" = "up to date" ]; then
-      printf "\n[J-Stack-AwesomeKB] Documentation Not Up to Date\n"
-      printf "\n[J-Stack-AwesomeKB] Generating Documentation\n"
+      printf "\n[J-Stack-AwesomeKB] Documentation Not Up to Date. Updating...\n"
+      
+      # Copying the updated contents into our current /docs folder
+      rm -rf $SCRIPTPATH/docs/*
+      cp -r $target_folder/docs/* $SCRIPTPATH/docs
       cd $SCRIPTPATH # need to go up one level since we are inside docsbuild-tmp
+      
+      printf "\n[J-Stack-AwesomeKB] Generating Documentation into "$2"\n"
       generate_documentation $2
+    
+    else
+    
+      printf "\n[J-Stack-AwesomeKB] Documentation Up to Date. No changes needed...\n"
+      
     fi  
   
   fi
