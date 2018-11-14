@@ -1,6 +1,10 @@
 AWESOMEKB TABLE OF CONTENTS
 ===========================
 
+ .. note::
+ 
+    This is the working demo of JSTACK-AWESOMEKB as described in https://www.eideon.com/2018-11-10-THL04-AwesomeKB/
+
  .. toctree::
     :maxdepth: 3
     :caption: DFIR100
