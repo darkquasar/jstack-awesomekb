@@ -1,3 +1,5 @@
+![awesome-kb](https://github.com/darkquasar/darkquasar.github.io/blob/master/img/THL004/13-mykb-banner.png)
+
 # J-Stack AwesomeKB
 **Your own, private, available from anywhere, 24x7, 2FA Knowledge Base!**
 
