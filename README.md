@@ -1,7 +1,8 @@
-![awesome-kb](https://github.com/darkquasar/darkquasar.github.io/blob/master/img/THL004/13-mykb-banner.png)
-
 # J-Stack AwesomeKB
 **Your own, private, available from anywhere, 24x7, 2FA Knowledge Base!**
+
+![awesome-kb](https://github.com/darkquasar/darkquasar.github.io/blob/master/img/THL004/13-mykb-banner.png)
+
 
 ## Summary
 The Jaguar Stack AwesomeKB is a small project that solves a pain point in relation to *free, private, secure and flexible* **knowledge documentation**. It's based in Docker to provide abstraction and versatility as well as easy deployment. The KB is comprised of the following elements:
