@@ -30,7 +30,7 @@ I’ve kept multiple types of KBs along the years: *word documents, simple text 
 11. **Low footprint** (ideally running on less than 512MB RAM)
 
 # How to deploy it?
-There is an article in [eideon.com] that is a companion to this repo were I explain with great detail how to deploy your own **AwesomeKB**. Please check it out here: https://www.eideon.com/2018-11-10-THL04-AwesomeKB/
+There is an article in [eideon.com]() that is a companion to this repo were I explain with great detail how to deploy your own **AwesomeKB**. Please check it out here: https://www.eideon.com/2018-11-10-THL04-AwesomeKB/
 
 ## Easy Deploy
 **[this is a snip from the article referenced above]** 
