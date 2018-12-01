@@ -32,7 +32,11 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.mathjax',
-              'm2r']
+              'm2r',
+              'sphinx_git',
+              'sphinx_issues',
+              'sphinxcontrib.googleanalytics',
+              'sphinxcontrib-disqus']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -169,5 +173,8 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
+# -- Other Extensions -----------------------------------------------------
 
+# google analytics
+googleanalytics_id = 'UA-106202121-2'
 

@@ -14,13 +14,17 @@ AWESOMEKB TABLE OF CONTENTS
  .. toctree::
     :maxdepth: 3
     :caption: OFFSEC100
-    :name: OFFSEC
     
     OFFSEC 101 - Recon <OFFSEC/recon101>
         
  .. toctree::
     :maxdepth: 3
     :caption: Resources
-    :name: Resources
     
     Awesome Resources <TOOLS/awesome-tools>
+    
+ .. toctree::
+    :maxdepth: 3
+    :caption: Changelog
+    
+    Git Changelog <changelog>
