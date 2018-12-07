@@ -32,6 +32,7 @@ generate_documentation() {
   # 1. Generate the documentation
   #    This docker command will pull darkquasar/inca-sphinx:1.0.0 from DockerHub and build your documentation 
   #    Any errors or warnings will be written to ./docker/compose/nginx/backend/html/awesomekb/warnings.log
+  echo "[J-Stack-AwesomeKB] Generating Documentation"
   docker run -v $(pwd)/docs:/docs/source -v $(pwd)/docker/compose/nginx/backend/html/$1:/docs/build darkquasar/inca-sphinx:1.1.0 sphinx-build -b html source build -w build/warnings.log
 
   # 2. Check whether documentation was properly generated
