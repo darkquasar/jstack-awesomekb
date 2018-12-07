@@ -166,7 +166,7 @@ git_pull_cron() {
   
   repo=git@github.com:$1
   repo_name=$(echo $repo | grep -Pio "(?<=\/).*")
-  target_folder=$SCRIPTPATH/docs-repo_name
+  target_folder=$SCRIPTPATH/docs-$repo_name
   
   # If the target_folder doesn't exist, let's clone the repo for the first time
   if [ ! -d "$target_folder" ]; then
