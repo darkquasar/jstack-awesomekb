@@ -1,6 +1,7 @@
 # Author: Diego Perez (@darkquasar)
 # License: GPL-3.0
 # JSTACK Version: 0.0.1
+# Inca-AwesomeKB Version: 0.1.0
 # Description: Dockerfile for sphinx with "markdown to rst" (m2r) plugin and "read the docs" theme in python3
 
 FROM phusion/baseimage:0.11
@@ -22,11 +23,25 @@ RUN apt-get update -qq --no-install-recommends \
        texlive \
        texlive-latex-extra \
        pandoc \
+	   git
+
+## Installing extra extensions
+RUN pip3 install sphinxcontrib-exceltable \
+    && pip3 install sphinxcontrib-inlinesyntaxhighlight \
+    && pip3 install sphinxcontrib-versioning \
+    && pip3 install sphinxcontrib-actdiag \
+    && pip3 install sphinxcontrib-blockdiag \
+    && pip3 install sphinxcontrib-googleanalytics \
+    && pip3 install sphinxcontrib-disqus \
+    && pip3 install sphinx-git \
+    && pip3 install releases \
+    && pip3 install sphinx-issues \
     && pip3 install m2r \
     && pip3 install sphinx_rtd_theme \
     && pip3 install sphinx-markdown-tables \
     && apt-get -qy clean autoremove \
     && rm -rf /var/lib/apt/lists/*
+
 
 # *** Creating Scripts Directory ***
 RUN mkdir docs
