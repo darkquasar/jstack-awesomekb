@@ -175,6 +175,7 @@ git_pull_cron() {
   if [ ! -d "$target_folder" ]; then
     
     # Cloning the repo
+	printf "\n[J-Stack-AwesomeKB] Cloning Repository "$2" for the first time\n"
     git clone $repo $target_folder
     
     # $2 name of the html virtual server in backend
