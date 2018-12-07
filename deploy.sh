@@ -197,7 +197,7 @@ git_pull_cron() {
       # Copying the updated contents into our current /docs folder
       rm -rf $SCRIPTPATH/docs/*
       cp -r $target_folder/docs/* $SCRIPTPATH/docs
-      cd $SCRIPTPATH # need to go up one level since we are inside docsbuild-tmp
+      cd $SCRIPTPATH # need to go up one level since we are inside $target_folder
       
       printf "\n[J-Stack-AwesomeKB] Generating Documentation into "$2"\n"
       generate_documentation $2
