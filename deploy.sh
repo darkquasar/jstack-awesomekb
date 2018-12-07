@@ -168,7 +168,10 @@ git_pull_cron() {
   repo_name=$(echo $repo | grep -Pio "(?<=\/).*")
   target_folder=$SCRIPTPATH/docs-$repo_name
   
-  # If the target_folder doesn't exist, let's clone the repo for the first time
+  # If the target_folder doesn't exist, let's 
+  # (1) clone the repo for the first time
+  # (2) build the documentation for the first time
+  
   if [ ! -d "$target_folder" ]; then
     
     # Cloning the repo
@@ -180,6 +183,10 @@ git_pull_cron() {
 
     # Copying the updated contents into our current /docs folder
     cp -r $target_folder/docs/* docs
+	
+	# Generating documentation
+	printf "\n[J-Stack-AwesomeKB] Generating Documentation for the first time into "$2"\n"
+    generate_documentation $2
   
   # Else, repo with documentation has been already cloned
   # only an update needed (git pull)
