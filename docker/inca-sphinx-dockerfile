@@ -32,7 +32,7 @@ RUN pip3 install sphinxcontrib-exceltable \
     && pip3 install sphinxcontrib-actdiag \
     && pip3 install sphinxcontrib-blockdiag \
     && pip3 install sphinxcontrib-googleanalytics \
-    && pip3 install sphinxcontrib-disqus \
+    && pip3 install -e git+git://github.com/rmk135/sphinxcontrib-disqus.git#egg=sphinxcontrib-disqus \
     && pip3 install sphinx-git \
     && pip3 install releases \
     && pip3 install sphinx-issues \
