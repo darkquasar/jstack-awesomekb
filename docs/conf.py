@@ -32,10 +32,9 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.mathjax',
+              'sphinx.ext.todo',
               'm2r',
-              'sphinx_git',
               'sphinx_issues',
-              'sphinxcontrib.googleanalytics',
               'sphinxcontrib-disqus']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,7 +50,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'DQ-AwesomeKB'
+project = 'AwesomeKB'
 copyright = '2018, Diego Perez (@darkquassar)'
 author = 'Diego Perez (@darkquasar)'
 
@@ -82,7 +81,7 @@ exclude_patterns = ['docker',
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
