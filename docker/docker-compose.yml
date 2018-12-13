@@ -32,6 +32,7 @@ services:
   jstack-nginx-backend:
     image: nginx:stable
     container_name: jstack-nginx-backend
+    hostname: jstack-nginx-backend
     restart: always
     volumes:
       - ./compose/nginx/backend/html/awesomekb:/usr/share/nginx/html/awesomekb.jstack.com
@@ -43,6 +44,7 @@ services:
   inca-authelia:
     image: clems4ever/authelia:latest
     container_name: inca-authelia
+    hostname: inca-authelia
     environment:
       - NODE_TLS_REJECT_UNAUTHORIZED=0
     restart: always
@@ -56,6 +58,8 @@ services:
       
   jstack-nginx-portal:
     image: nginx:alpine
+    container_name: jstack-nginx-portal
+    hostname: jstack-nginx-portal
     volumes:
       - ./compose/nginx/portal/nginx.conf:/etc/nginx/nginx.conf
       - ./compose/nginx/portal/ssl:/etc/ssl
@@ -68,6 +72,7 @@ services:
   jstack-ldap:
     image: osixia/openldap
     container_name: jstack-ldap
+    hostname: jstack-ldap
     ulimits:
       nofile:
         soft: 1024
