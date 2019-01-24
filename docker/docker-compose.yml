@@ -130,6 +130,89 @@ services:
     networks:
       - jstack
 
+## This docker image allows the end user to change his/her own password via self-service.
+  inca-selfservice:
+    image: tiredofit/self-service-password:latest
+    container_name: inca-selfservice
+    volumes:
+      - ./compose/selfservice/data/:/www/ssp
+      - ./compose/selfservice/logs/:/www/logs
+    environment:
+      - VIRTUAL_HOST=selfservice-kb.balcos.io
+      - VIRTUAL_NETWORK=nginx-proxy
+      - VIRTUAL_PORT=80
+      - ZABBIX_HOSTNAME=ssp-app
+      - LDAP_SERVER=ldap://jstack-ldap
+      - LDAP_STARTTLS=false
+      - LDAP_BINDDN=cn=admin,dc=jstack,dc=com
+      - LDAP_BINDPASS=YourLDAPAdminPass
+      - LDAP_BASE_SEARCH=ou=users,dc=jstack,dc=com
+      - LDAP_LOGIN_ATTRIBUTE=cn
+      - LDAP_FULLNAME_ATTRIBUTE=cn
+      # Active Directory mode
+      # true: use unicodePwd as password field
+      # false: LDAPv3 standard behavior
+      - ADMODE=false
+      # Force account unlock when password is changed
+      - AD_OPT_FORCE_UNLOCK=false
+      # Force user change password at next login
+      - AD_OPT_FORCE_PWD_CHANGE=false
+      # Allow user with expired password to change password
+      - AD_OPT_CHANGE_EXPIRED_PASSWORD=false
+      - PASSWORD_HASH=CRYPT
+      # Local password policy
+      # This is applied before directory password policy
+      # Minimal length
+      - PASSWORD_MIN_LENGTH=12
+      # Maximal length
+      - PASSWORD_MAX_LENGTH=30
+      # Minimal lower characters
+      - PASSWORD_MIN_LOWERCASE=1
+      # Minimal upper characters
+      - PASSWORD_MIN_UPPERCASE=1
+      # Minimal digit characters
+      - PASSWORD_MIN_DIGIT=1
+      # Minimal special characters
+      - PASSWORD_MIN_SPECIAL=0
+      # Dont reuse the same password as currently
+      - PASSWORD_NO_REUSE=true
+      # Show policy constraints message:
+      # always
+      # never
+      # onerror
+      - PASSWORD_SHOW_POLICY=onerror
+      # Position of password policy constraints message:
+      # above - the form
+      # below - the form
+      - PASSWORD_SHOW_POLICY_POSITION=above
+      # Who changes the password?
+      # applicable for question/answer save
+      # user: the user itself
+      # manager: the above binddn
+      - WHO_CAN_CHANGE_PASSWORD=user
+      ## Questions/answers
+      # Use questions/answers?
+      # true (default)
+      # false
+      - QUESTIONS_ENABLED=false
+      # Reset URL (if behind a reverse proxy)
+      - IS_BEHIND_PROXY=true
+      # Display help messages
+      - SHOW_HELP=true
+      # Language
+      - LANG=en
+      # Debug mode
+      - DEBUG_MODE=false
+      # Encryption, decryption keyphrase
+      - SECRETEKEY=SomeRandomKey
+      ## Mail
+      # LDAP mail attribute
+      - LDAP_MAIL_ATTRIBUTE=mail
+      # Notify users anytime their password is changed
+      - NOTIFY_ON_CHANGE=true
+    networks:
+      - jstack
+
 networks:
   jstack:
     driver: bridge
