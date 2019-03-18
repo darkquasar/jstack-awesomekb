@@ -43,6 +43,39 @@ generate_documentation() {
 
 }
 
+generate_sphinx_pdf() {
+  
+  # This function will generate the PDF equivalent of the .RST files using LaTeX and Sphinx.
+  
+  if [ $# = 0 ]; then
+    
+    echo "[J-Stack-AwesomeKB] Please provide a name for the virtual server you are trying to generate the output to (ex. awesomekb.jstack.com)"
+    
+    exit 1
+    
+  fi
+
+  if [ ! $# = 2 ]; then
+    
+    echo "[J-Stack-AwesomeKB] Please provide a name for the LaTeX file that should be used as base for the PDF generation (ex. MyKB.tex)"
+    
+    exit 1
+    
+  fi
+  
+  # 1. Generate the documentation
+  #    This docker command will pull darkquasar/inca-sphinx:1.0.0 from DockerHub and build your documentation 
+  echo "[J-Stack-AwesomeKB] Generating PDF Documentation"
+  docker run -v $(pwd)/docs:/docs/source -v $(pwd)/docker/compose/nginx/backend/html/$1:/docs/build darkquasar/inca-sphinx:1.1.0 bash -c "mkdir latexbuild; sphinx-build -b latex source latexbuild; cd /docs/latexbuild; pdflatex $2; cp *.pdf /docs/build; exit"
+
+  # 2. Check whether documentation was properly generated
+  if [ ! -f docker/compose/nginx/backend/html/$1/$2 ]; then
+    echo "Documentation not generated! Check $(pwd)/docker/compose/nginx/backend/html/awesomekb/warnings.log Alternatively, run inca-sphinx in interactive mode and build your documentation that way. Be sure to map a volume to \"$(pwd)/docker/compose/nginx/backend/html/awesomekb\" which is where jstack-nginx-backend will search for the documents to be served by nginx. Exiting..."
+    exit 1
+  fi
+
+}
+
 run_kb() {
 
   # Note: Pass in the name of the backend virtual server 
@@ -268,5 +301,9 @@ elif [ $1 = "removecontainers" ]; then
 elif [ $1 = "gen-certs" ]; then
 
   generate_certs
+
+elif [ $1 = "gen-sphinx-pdf" ]; then
+
+  generate_sphinx_pdf $2 $3
   
 fi
