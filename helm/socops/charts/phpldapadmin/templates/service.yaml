@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  {{ template "phpldapadmin.fullname" . }}
+  labels:
+    app: {{ template "phpldapadmin.name" . }}
+    chart: {{ template "phpldapadmin.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    app: {{ template "phpldapadmin.name" . }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.listeningport }}
+    name: phpldapadmin-port
+  type: ClusterIP
