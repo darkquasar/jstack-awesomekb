@@ -12,6 +12,7 @@ spec:
     app: {{ template "phpldapadmin.name" . }}
   ports:
   - protocol: TCP
-    port: {{ .Values.listeningport }}
+    port: {{ .Values.service.serviceport }}
+    targetPort: {{ .Values.service.containerport }}
     name: phpldapadmin-port
   type: ClusterIP

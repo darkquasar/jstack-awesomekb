@@ -12,7 +12,7 @@ metadata:
 {{- end }}
 spec:
   selector:
-    matchLabel:
+    matchLabels:
       app: {{ template "phpldapadmin.name" . }}
   replicas: 1
   template:
@@ -23,15 +23,15 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        image: {{ .Values.image.name }}:{{ .Values.image.version }}
+        image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.version }}
         env:
         - name: PHPLDAPADMIN_LDAP_HOSTS
           value: {{ .Values.LDAP.host }}
         - name: PHPLDAPADMIN_HTTPS
           value: "false"
         ports:
-        - containerPort: {{ .Values.listeningport }}
+        - containerPort: {{ .Values.service.containerport }}
         resources:
           limits:
-            cpu: {{ .Values.limits.cpu }}
-            memory: {{ .Values.limits.memory }}
+            cpu: {{ .Values.deployment.resources.limits.cpu }}
+            memory: {{ .Values.deployment.resources.limits.memory }}
