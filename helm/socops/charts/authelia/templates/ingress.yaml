@@ -1,0 +1,32 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: authelia-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.allow-http: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/auth-url: "http://authelia-service.authelia.svc.cluster.local/api/verify"
+    nginx.ingress.kubernetes.io/auth-signin: "https://login.eideon.com:8080/#/"
+spec:
+  tls:
+  - secretName: authelia-tls
+    hosts:
+    - login.eideon.com
+    - socops.eideon.com
+  rules:
+  - host: login.eideon.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: authelia-service
+          servicePort: {{ .Values.service.serviceport }}
+  - host: socops.eideon.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: phpl-phpldapadmin
+          servicePort: 1443

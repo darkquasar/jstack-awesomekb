@@ -5,8 +5,8 @@
 deployment: 
   ## Image Configuration
   image:
-    name: osixia/phpldapadmin
-    version: 0.7.2
+    name: clems4ever/authelia
+    version: latest
   ## Resources
   resources:
     limits:
@@ -17,14 +17,16 @@ deployment:
 ## ********************************** ##
 
 # FQDN of the LDAP server to connect to
-LDAP:
-  host: ldap://socops-ldap-openldap.default.svc.cluster.local:389
+authelia_conf:
+  default_redirection_url: https://socops.eideon.com
+  ldap_host: ldap://socops-ldap-openldap.default.svc.cluster.local:389
+  session_secret: unsecure_password_yeah_testing
 
 ## Service Configuration ##
 ## ********************* ##
 
 service:
-  serviceport: 1443
+  serviceport: 80
   containerport: 80
 
 ## Configure the ingress resource that allows you to access the
@@ -48,7 +50,7 @@ ingress:
     certManager: false
 
     ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
-    tlsSecret: phpldapadmin.local-tls
+    tlsSecret: authelia.local-tls
 
     ## Ingress annotations done as key:value pairs
     ## For a full list of possible ingress annotations, please see

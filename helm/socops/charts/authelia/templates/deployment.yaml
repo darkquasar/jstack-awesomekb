@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: authelia
+  labels:
+    app: authelia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authelia
+  template:
+    metadata:
+      labels:
+        app: authelia
+    spec:
+      containers:
+      - name: authelia
+        image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.version }}
+        ports:
+        - containerPort: {{ .Values.service.containerport }}
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/authelia
+      volumes:
+      - name: config-volume
+        configMap:
+          name: authelia-config
+          items:
+          - key: config.yml
+            path: config.yml
