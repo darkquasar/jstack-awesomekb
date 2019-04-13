@@ -113,6 +113,7 @@ session:
   redis:
     host: soc2-redis-master.default.svc.cluster.local
     port: 6379
+    password: authelia
 
 # Configuration of the authentication regulation mechanism.
 #
