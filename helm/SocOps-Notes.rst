@@ -42,7 +42,7 @@ Using the new chart officially maintained by Jetstack
 
 Install Cert-Manager
 
-1. Follow steps in their official page (link):
+1. Follow steps in their official page (link --> https://docs.cert-manager.io/en/latest/getting-started/install.html):
 
 # Install the CustomResourceDefinition resources separately
 kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.7/deploy/manifests/00-crds.yaml
