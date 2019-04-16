@@ -9,4 +9,4 @@ metadata:
   name: authelia-config
 data:
   config.yml: |-
-{{ (tpl (.Files.Get "configs/config.yml") . ) | indent 4 }}
+{{ (tpl (.Files.Get "files/authelia-config.yml") . ) | indent 4 }}

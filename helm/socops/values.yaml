@@ -1,3 +1,25 @@
+## ** Global Values ** ##
+## ******************* ##
+
+global:
+  certman:
+    deployacmeclusterissuer: true
+    email: admin@eideon.com
+
+## ** Application Specific ** ##
+## ************************** ##
+
+## === Generate Passwords for Sub-Charts === ##
+# This is useful when automatically generated passwords defined in sub-charts are weak :)
+
+genpass: true
+
+passwords:
+  secrets:
+    redis: 
+      name: redis
+      keys:
+        password: "defaultpass"
 
 ## ** Dependencies ** ##
 ## ****************** ##
@@ -11,8 +33,7 @@ authelia:
 authentication:
   openldap: true
 
-## ** Sub-Chart Value Overrides ** ##
-## ******************************* ##
+## === Sub-Chart Value Overrides === ##
 
 ## Redis
 ## NOTE: Only applies when authelia.enabled = true
@@ -28,7 +49,7 @@ redis:
     enabled: false
     slaveCount: 0
   usePassword: true
-  password: JHC948lkjaskOP9843jzashdke4310JJE
+  password: defaultpass
 
 ## Mongo
 ## NOTE: Only applies when authelia.enabled = true
@@ -43,7 +64,7 @@ mongodb:
   usePassword: true
   ## MongoDB admin password
   ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
-  mongodbRootPassword: JHC948lkjaskOP9843jzashdke4310JJE
+  mongodbRootPassword: defaultpass
 
   persistence:
     enabled: true

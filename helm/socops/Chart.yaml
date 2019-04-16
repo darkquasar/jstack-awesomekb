@@ -1,0 +1,15 @@
+name: socops
+home: https://www.eideon.com/2018-11-10-THL04-AwesomeKB/
+version: 0.1.0
+appVersion: 0.1.0
+description: Security Operations Center Knowledgebase
+keywords:
+  - SOCaaC
+  - SOC
+  - Knowledgebase
+  - KB
+  - secops
+maintainers:
+  - name: darkquasar
+    email: darkquasar7@gmail.com
+engine: gotpl
