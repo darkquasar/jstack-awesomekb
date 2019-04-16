@@ -1,0 +1,81 @@
+
+## ** Dependencies ** ##
+## ****************** ##
+
+# Defining whether we want Authelia as 2FA front/backend
+authelia:
+  enabled: true
+
+# Defining whether we want an LDAP authentication backend enabled
+# NOTE: required if authelia.enabled = true
+authentication:
+  openldap: true
+
+## ** Sub-Chart Value Overrides ** ##
+## ******************************* ##
+
+## Redis
+## NOTE: Only applies when authelia.enabled = true
+
+redis:
+  image:
+    registry: docker.io
+    repository: bitnami/redis
+    tag: 4.0.14
+    pullPolicy: IfNotPresent
+
+  cluster:
+    enabled: false
+    slaveCount: 0
+  usePassword: true
+  password: JHC948lkjaskOP9843jzashdke4310JJE
+
+## Mongo
+## NOTE: Only applies when authelia.enabled = true
+
+mongodb:
+  image:
+    registry: docker.io
+    repository: bitnami/mongodb
+    tag: 4.0.9
+    pullPolicy: IfNotPresent
+
+  usePassword: true
+  ## MongoDB admin password
+  ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
+  mongodbRootPassword: JHC948lkjaskOP9843jzashdke4310JJE
+
+  persistence:
+    enabled: true
+    storageClass: "microk8s-hostpath"
+    storageClassName: "microk8s-hostpath"
+    mountPath: /bitnami/mongodb
+    accessModes:
+      - ReadWriteOnce
+    size: 100Mi
+
+## OpenLDAP
+## NOTE: Only applies when authelia.enabled = true
+
+openldap:
+  image:
+  # From repository https://github.com/osixia/docker-openldap
+    repository: osixia/openldap
+    tag: 1.2.1
+    pullPolicy: IfNotPresent
+
+  env:
+    LDAP_ORGANISATION: "Eideon"
+    LDAP_DOMAIN: "eideon.com"
+    LDAP_BACKEND: "hdb"
+    LDAP_TLS: "true"
+    LDAP_TLS_ENFORCE: "false"
+    LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+
+  persistence:
+    enabled: true
+    storageClass: "microk8s-hostpath"
+    storageClassName: "microk8s-hostpath"
+    accessMode: ReadWriteOnce
+    size: 50Mi
+
