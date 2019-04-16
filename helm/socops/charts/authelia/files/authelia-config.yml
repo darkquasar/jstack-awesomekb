@@ -35,7 +35,7 @@ authentication_backend:
   # production.
   ldap:
     # The url of the ldap server
-    url: {{ .Values.authelia_conf.ldap_host }}
+    url: {{ printf "ldap://%s-openldap.default.svc.cluster.local:389" (.Release.Name) }}
 
   
     # The base dn for every entries
@@ -111,7 +111,7 @@ session:
   
   # The redis connection details
   redis:
-    host: soc2-redis-master.default.svc.cluster.local
+    host: {{ printf "%s-redis-master.default.svc.cluster.local" (.Release.Name) }}
     port: 6379
     password: authelia
 
@@ -140,7 +140,7 @@ storage:
   
   # Settings to connect to mongo server
   mongo:
-    url: mongodb://soc3-mongodb.default.svc.cluster.local
+    url: {{ printf "mongodb://%s-mongodb.default.svc.cluster.local" (.Release.Name) }}
     database: authelia
 
 # Configuration of the notification system.
