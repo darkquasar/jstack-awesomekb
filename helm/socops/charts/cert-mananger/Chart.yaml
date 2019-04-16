@@ -1,0 +1,12 @@
+name: cert-manager
+home: https://github.com/jetstack/cert-manager
+version: 0.1.0
+appVersion: 0.7.0
+description: This chart is here only to deploy the ACME ClusterIssuer for Cert-Manager a-la-Helm
+keywords:
+  - cert-manager
+  - ClusterIssuer
+maintainers:
+  - name: darkquasar
+    email: darkquasar7@gmail.com
+engine: gotpl
