@@ -2,20 +2,23 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: authelia
+  name:  {{ template "authelia.fullname" . }}
   labels:
-    app: authelia
+    app: {{ template "authelia.name" . }}
+    chart: {{ template "authelia.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authelia
+      app: {{ template "authelia.name" . }}
   template:
     metadata:
       labels:
-        app: authelia
-    annotations:
-      checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        app: {{ template "authelia.name" . }}
+      annotations:
+        checksum.helm.kubernetes.io/configmap: {{ include (print $.Template.BasePath "configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - name: authelia

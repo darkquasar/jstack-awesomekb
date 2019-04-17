@@ -3,7 +3,7 @@
 
 global:
   certman:
-    deployacmeclusterissuer: true
+    deployacmeclusterissuer: false
     email: admin@eideon.com
 
 ## ** Application Specific ** ##

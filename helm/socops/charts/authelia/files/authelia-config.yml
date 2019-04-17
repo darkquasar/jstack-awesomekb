@@ -169,6 +169,6 @@ notifier:
     username: test
     password: password
     secure: false
-    host: '{{ printf %s-mailcatcher.%s.svc.cluster.local" (.Release.Name) (.Release.Namespace) }}'
+    host: '{{ printf "%s-mailcatcher.%s.svc.cluster.local" (.Release.Name) (.Release.Namespace) }}'
     port: 1025
     sender: admin@example.com

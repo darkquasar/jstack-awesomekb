@@ -2,12 +2,17 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: authelia-ingress
+  name:  {{ template "authelia.fullname" . }}
+  labels:
+    app: {{ template "authelia.name" . }}
+    chart: {{ template "authelia.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/ingress.allow-http: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/auth-url: "http://authelia-service.default.svc.cluster.local/api/verify"
+    nginx.ingress.kubernetes.io/auth-url: {{ printf "http://%s.%s.svc.cluster.local/api/verify" (template "authelia.fullname" .) (.Release.Namespace) }}
     nginx.ingress.kubernetes.io/auth-signin: "https://login.eideon.com/#/"
 spec:
   tls:
@@ -28,5 +33,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: phpl-phpldapadmin
+          serviceName: {{ printf "%s-%s" (.Release.Name) "phpldapadmin" }}
           servicePort: 1443
