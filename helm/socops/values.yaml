@@ -11,8 +11,12 @@ global:
 
 ## === Generate Passwords for Sub-Charts === ##
 # This is useful when automatically generated passwords defined in sub-charts are weak :)
-
-genpass: true
+# NOTE: this config block was generated to test the ability to generate passwords at "deploy-time"
+# but it is not very useful when those passwords need to be updated inside a config file (for ex. 
+# "authelia-config.yml") since
+# Helm doesn't have that ability yet. Also there is the issue of secret missmatches when
+# a component of the Chart gets upgraded (https://github.com/helm/helm/blob/master/docs/charts_tips_and_tricks.md#be-careful-with-generating-random-values)
+genpass: false
 
 passwords:
   secrets:
@@ -92,6 +96,7 @@ openldap:
     LDAP_TLS: "true"
     LDAP_TLS_ENFORCE: "false"
     LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+    adminPassword: defaultpass
 
   persistence:
     enabled: true
