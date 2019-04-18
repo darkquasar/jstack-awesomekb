@@ -27,7 +27,7 @@ default_redirection_url: '{{ .Values.authelia_conf.default_redirection_url }}'
 # This will be the issuer name displayed in Google Authenticator
 # See: https://github.com/google/google-authenticator/wiki/Key-Uri-Format for more info on issuer names
 totp:
-  issuer: authelia.com
+  issuer: socops.awesomekbs.com
 
 # The authentication backend to use for verifying user passwords
 # and retrieve information such as email address and groups
@@ -95,13 +95,16 @@ access_control:
 
   rules:
     # Rules applied to everyone
-    - domain: '*.eideon.com'
+    - domain: 'socops.awesomekbs.com'
       policy: two_factor
 
 # Configuration of session cookies
 # 
 # The session cookies identify the user once logged in.
 session:
+  
+  name: authelia_session_yeah_man
+
   # The secret to encrypt the session cookie.
   secret: '{{ .Values.authelia_conf.session_secret }}'
   
@@ -114,7 +117,7 @@ session:
   # The domain to protect.
   # Note: the authenticator must also be in that domain. If empty, the cookie
   # is restricted to the subdomain of the issuer. 
-  domain: eideon.com
+  domain: awesomekbs.com
   
   # The redis connection details
   redis:
@@ -178,4 +181,4 @@ notifier:
     secure: false
     host: '{{ printf "%s-mailcatcher.%s.svc.cluster.local" (.Release.Name) (.Release.Namespace) }}'
     port: 1025
-    sender: admin@example.com
+    sender: admin@awesomekbs.com
