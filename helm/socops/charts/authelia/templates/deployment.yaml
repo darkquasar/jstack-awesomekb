@@ -18,7 +18,7 @@ spec:
       labels:
         app: {{ template "authelia.name" . }}
       annotations:
-        checksum.helm.kubernetes.io/configmap: {{ include (print $.Template.BasePath "configmap.yaml") . | sha256sum }}
+        checksum.helm.kubernetes.io/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - name: authelia

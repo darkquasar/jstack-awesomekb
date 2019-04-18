@@ -10,6 +10,29 @@ install-prerequisites() {
   sudo add-apt-repository ppa:rmescandon/yq
   sudo apt update
   sudo apt install yq -y
+
+
+}
+
+deploy-k8s() {
+  ## Simple function to deploy a single node k8s cluster using microk8s
+  
+  # Install microk8s
+  sudo snap install microk8s
+  
+  # Enabling required plugins
+  microk8s.enable storage registry ingress dns dashboard
+
+  # Creating alias for commands
+  alias kubectl=microk8s.kubectl
+
+}
+
+install-tiller() {
+  kubectl -n kube-system create serviceaccount tiller
+  kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+  helm init --service-account tiller
+
 }
 
 install-certman() {

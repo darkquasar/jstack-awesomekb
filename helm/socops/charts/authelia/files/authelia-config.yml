@@ -22,6 +22,13 @@ logs_level: debug
 # be redirected upon successful authentication.
 default_redirection_url: '{{ .Values.authelia_conf.default_redirection_url }}'
 
+# TOTP Issuer Name
+#
+# This will be the issuer name displayed in Google Authenticator
+# See: https://github.com/google/google-authenticator/wiki/Key-Uri-Format for more info on issuer names
+totp:
+  issuer: authelia.com
+
 # The authentication backend to use for verifying user passwords
 # and retrieve information such as email address and groups
 # users belong to.
