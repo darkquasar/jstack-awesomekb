@@ -26,7 +26,7 @@ spec:
         image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.version }}
         env:
         - name: PHPLDAPADMIN_LDAP_HOSTS
-          value: {{ .Values.LDAP.host }}
+          value: {{ printf "ldap://%s-openldap.%s.svc.cluster.local:389" (.Release.Name) (.Release.Namespace) }}
         - name: PHPLDAPADMIN_HTTPS
           value: "false"
         ports:

@@ -17,8 +17,11 @@ deployment:
 ## ********************************** ##
 
 # FQDN of the LDAP server to connect to
-LDAP:
-  host: ldap://socops-ldap-openldap.default.svc.cluster.local:389
+# Uncoment the lines below if you wish to specify the host statically, otherwise 
+# it is dynamically generated with the Helm Release
+
+#LDAP:
+#  host: ldap://socops-ldap-openldap.default.svc.cluster.local:389
 
 ## Service Configuration ##
 ## ********************* ##

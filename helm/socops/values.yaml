@@ -70,6 +70,13 @@ mongodb:
   ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
   mongodbRootPassword: defaultpass
 
+  ## MongoDB custom user and database
+  ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#creating-a-user-and-database-on-first-run
+  ##
+  mongodbUsername: zeratul
+  mongodbPassword: defaultpass
+  mongodbDatabase: authelia
+
   persistence:
     enabled: true
     storageClass: "microk8s-hostpath"
