@@ -13,22 +13,22 @@ metadata:
     kubernetes.io/ingress.allow-http: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/auth-url: {{ printf "http://%s.%s.svc.cluster.local/api/verify" (template "authelia.fullname" .) (.Release.Namespace) }}
-    nginx.ingress.kubernetes.io/auth-signin: "https://login.eideon.com/#/"
+    nginx.ingress.kubernetes.io/auth-signin: "https://login.awesomekbs.com/#/"
 spec:
   tls:
   - secretName: authelia-tls
     hosts:
-    - login.eideon.com
-    - socops.eideon.com
+    - login.awesomekbs.com
+    - socops.awesomekbs.com
   rules:
-  - host: login.eideon.com
+  - host: login.awesomekbs.com
     http:
       paths:
       - path: /
         backend:
           serviceName: authelia-service
           servicePort: {{ .Values.service.serviceport }}
-  - host: socops.eideon.com
+  - host: socops.awesomekbs.com
     http:
       paths:
       - path: /
