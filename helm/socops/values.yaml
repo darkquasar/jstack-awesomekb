@@ -73,9 +73,11 @@ mongodb:
   ## MongoDB custom user and database
   ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#creating-a-user-and-database-on-first-run
   ##
-  mongodbUsername: zeratul
-  mongodbPassword: defaultpass
-  mongodbDatabase: authelia
+  #mongodbUsername: zeratul
+  #mongodbPassword: defaultpass
+  #mongodbDatabase: authelia
+
+  mongodbSystemLogVerbosity: 5
 
   persistence:
     enabled: true
@@ -84,7 +86,7 @@ mongodb:
     mountPath: /bitnami/mongodb
     accessModes:
       - ReadWriteOnce
-    size: 100Mi
+    size: 250Mi
 
 ## OpenLDAP
 ## NOTE: Only applies when authelia.enabled = true
@@ -103,7 +105,8 @@ openldap:
     LDAP_TLS: "true"
     LDAP_TLS_ENFORCE: "false"
     LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
-    adminPassword: defaultpass
+
+  adminPassword: defaultpass
 
   persistence:
     enabled: true
