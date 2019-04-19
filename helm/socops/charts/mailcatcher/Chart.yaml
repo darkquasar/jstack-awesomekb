@@ -1,11 +1,10 @@
-name: phpldapadmin
-home: http://phpldapadmin.sourceforge.net/wiki/index.php/Main_Page
+name: mailcatcher
+home: https://mailcatcher.me/
 version: 0.1.0
-appVersion: 2.4.44
-description: Web-based LDAP browser to manage your LDAP server
+appVersion: 0.6.4
+description: Ruby-based Mail server for development purposes
 keywords:
-  - phpldapadmin
-  - ldapadminphp
+  - mailcatcher
 maintainers:
   - name: darkquasar
     email: darkquasar7@gmail.com

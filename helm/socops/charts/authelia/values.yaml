@@ -19,6 +19,7 @@ deployment:
 # FQDN of the LDAP server to connect to
 authelia_conf:
   default_redirection_url: https://socops.awesomekbs.com
+  session_name: my_life_for_aiur
   session_secret: RdajeQNYr3bU6DKsm5LsNuBAihY8C5Pf
 
 ## Service Configuration ##

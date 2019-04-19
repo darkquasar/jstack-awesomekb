@@ -103,7 +103,7 @@ access_control:
 # The session cookies identify the user once logged in.
 session:
   
-  name: authelia_session_yeah_man
+  name: '{{ .Values.authelia_conf.session_name }}'
 
   # The secret to encrypt the session cookie.
   secret: '{{ .Values.authelia_conf.session_secret }}'
@@ -176,8 +176,8 @@ notifier:
   
   # Use a SMTP server for sending notifications
   smtp:
-    username: test
-    password: password
+    username: zeratul
+    password: defaultpass
     secure: false
     host: '{{ printf "%s-mailcatcher.%s.svc.cluster.local" (.Release.Name) (.Release.Namespace) }}'
     port: 1025
