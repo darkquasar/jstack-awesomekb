@@ -1,0 +1,12 @@
+name: nginx
+home: https://nginx.com/
+version: 0.1.0
+appVersion: 0.6.4
+description: Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
+keywords:
+  - nginx
+  - socops
+maintainers:
+  - name: darkquasar
+    email: darkquasar7@gmail.com
+engine: gotpl

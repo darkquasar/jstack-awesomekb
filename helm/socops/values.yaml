@@ -115,19 +115,29 @@ openldap:
     accessMode: ReadWriteOnce
     size: 50Mi
 
-## NGINX
-## NOTE: Only applies when authelia.enabled = true
+  customLdifFiles:
+    01-default.ldif: |-
+      dn: ou=groups,dc=eideon,dc=com
+      objectclass: organizationalUnit
+      objectclass: top
+      ou: groups
 
-vhost: |-
-  # example PHP-FPM vhost
-  server {
-    listen 0.0.0.0:8080;
-    root /usr/share/nginx/html/socops.awesomekbs.com;
-    server_name     socops.awesomekbs.com;
-      
-    # SECURITY. Deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    location ~ /\.ht {
-      deny  all;
-    }
-  }
+      dn: cn=admin,ou=groups,dc=eideon,dc=com
+      cn: admin
+      member: cn=jaguar01,ou=users,dc=eideon,dc=com
+      objectclass: groupOfNames
+      objectclass: top
+
+      dn: ou=users,dc=eideon,dc=com
+      objectclass: organizationalUnit
+      objectclass: top
+      ou: users
+
+      dn: cn=jaguar01,ou=users,dc=eideon,dc=com
+      cn: jaguar01
+      mail: jaguar01@authelia.com
+      objectclass: inetOrgPerson
+      objectclass: top
+      sn: Jaguar Hunter 01
+      userpassword: {CRYPT}$6$rounds=500000$jgiCMRyGXzoqpxS3$w2pJeZnnH8bwW3zzvoMWtTRfQYsHbWbD/hquuQ5vUeIyl9gdwBIt6RWk2S6afBA0DPakbeWgD/4SZPiS0hYtU/
+
