@@ -115,3 +115,19 @@ openldap:
     accessMode: ReadWriteOnce
     size: 50Mi
 
+## NGINX
+## NOTE: Only applies when authelia.enabled = true
+
+vhost: |-
+  # example PHP-FPM vhost
+  server {
+    listen 0.0.0.0:8080;
+    root /usr/share/nginx/html/socops.awesomekbs.com;
+    server_name     socops.awesomekbs.com;
+      
+    # SECURITY. Deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    location ~ /\.ht {
+      deny  all;
+    }
+  }

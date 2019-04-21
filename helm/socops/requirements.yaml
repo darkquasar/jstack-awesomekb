@@ -11,3 +11,7 @@ dependencies:
   version: ^0.3.0
   repository: https://kubernetes-charts.storage.googleapis.com/
   condition: authentication.openldap.enabled
+- name: nginx
+  version: ^1.14.2
+  repository: https://charts.bitnami.com
+  condition: authelia.enabled
