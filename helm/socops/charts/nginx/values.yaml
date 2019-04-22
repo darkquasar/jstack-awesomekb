@@ -62,6 +62,14 @@ vhost: |-
     }
   }
 
+## ** Deployment Configs ** ##
+## ************************ ##
+www-data:
+  mount: yes
+  name: socops
+  type: hostPath
+  path: /home/ubuntu/jstack-awesomekb/helm/socops/charts/nginx/files/socops.awesomekbs.com
+
 ## Pod annotations
 ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 ##

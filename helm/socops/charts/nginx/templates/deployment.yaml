@@ -57,8 +57,10 @@ spec:
         - name: nginx-vhost
           mountPath: /opt/bitnami/nginx/conf/vhosts
         {{- end }}
-        - name: socops
+        {{- if .Values.www-data.mount }}
+        - name: {{- .Values.www-data.name }}
           mountPath: /opt/bitnami/nginx/html
+        {{- end }}
 {{- if .Values.metrics.enabled }}
       - name: metrics
         image: {{ template "nginx.metrics.image" . }}
@@ -88,6 +90,8 @@ spec:
         configMap:
           name: {{ template "fullname" . }}
       {{- end }}
-      - name: nginx-data
-        hostPath:
-          path: ./files/socops.awesomekbs.com
+      {{- if .Values.www-data.mount }}
+      - name: {{- .Values.www-data.name }}
+        {{- .Values.www-data.type }}:
+          path: {{- .Values.www-data.path }}
+      {{- end }}
