@@ -15,8 +15,8 @@ restartPolicy: Never
 ##
 image:
   registry: docker.io
-  repository: nginx
-  tag: alpine
+  repository: bitnami/nginx
+  tag: 1.14.2
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -50,8 +50,8 @@ service:
 vhost: |-
   server {
     listen 0.0.0.0:8080;
-    root /opt/bitnami/nginx/html/socops.awesomekbs.com;
-    server_name     socops.awesomekbs.com;
+    root /app/socops.awesomekbs.com;
+    #server_name     socops.awesomekbs.com;
       
     # SECURITY. Deny access to .htaccess files, if Apache's document root
     # concurs with nginx's one
