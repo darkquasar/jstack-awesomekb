@@ -52,7 +52,9 @@ vhost: |-
     listen 0.0.0.0:8080;
     root /app/socops.awesomekbs.com;
     #server_name     socops.awesomekbs.com;
-      
+    location / {
+      index index.html index.php;
+    }
     # SECURITY. Deny access to .htaccess files, if Apache's document root
     # concurs with nginx's one
     location ~ /\.ht {
