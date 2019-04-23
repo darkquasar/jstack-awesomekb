@@ -57,8 +57,8 @@ spec:
         - name: nginx-vhost
           mountPath: /opt/bitnami/nginx/conf/vhosts
         {{- end }}
-        {{- if .Values.www-data.mount }}
-        - name: {{- .Values.www-data.name }}
+        {{- if .Values.wwwdata.mount }}
+        - name: {{ .Values.wwwdata.name }}
           mountPath: /opt/bitnami/nginx/html
         {{- end }}
 {{- if .Values.metrics.enabled }}
@@ -90,8 +90,8 @@ spec:
         configMap:
           name: {{ template "fullname" . }}
       {{- end }}
-      {{- if .Values.www-data.mount }}
-      - name: {{- .Values.www-data.name }}
-        {{- .Values.www-data.type }}:
-          path: {{- .Values.www-data.path }}
+      {{- if .Values.wwwdata.mount }}
+      - name: {{ .Values.wwwdata.name }}
+{{ .Values.wwwdata.type | indent 8 }}:
+          path: {{ .Values.wwwdata.path }}
       {{- end }}

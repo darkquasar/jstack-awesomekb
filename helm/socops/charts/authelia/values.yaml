@@ -6,7 +6,7 @@ deployment:
   ## Image Configuration
   image:
     name: clems4ever/authelia
-    version: latest
+    version: 3.13.0
   ## Resources
   resources:
     limits:

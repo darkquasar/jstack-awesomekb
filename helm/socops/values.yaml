@@ -63,7 +63,7 @@ mongodb:
     registry: docker.io
     repository: bitnami/mongodb
     tag: 4.0.9
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   usePassword: true
   ## MongoDB admin password

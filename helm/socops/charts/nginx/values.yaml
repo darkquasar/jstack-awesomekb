@@ -50,7 +50,7 @@ service:
 vhost: |-
   server {
     listen 0.0.0.0:8080;
-    root /app/socops.awesomekbs.com;
+    root /app;
     #server_name     socops.awesomekbs.com;
     location / {
       index index.html index.php;
@@ -64,8 +64,8 @@ vhost: |-
 
 ## ** Deployment Configs ** ##
 ## ************************ ##
-www-data:
-  mount: yes
+wwwdata:
+  mount: true
   name: socops
   type: hostPath
   path: /home/ubuntu/jstack-awesomekb/helm/socops/charts/nginx/files/socops.awesomekbs.com
