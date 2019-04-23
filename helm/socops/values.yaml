@@ -52,6 +52,11 @@ redis:
   cluster:
     enabled: false
     slaveCount: 0
+  
+  master:
+    persistence:
+      enabled: false
+  
   usePassword: true
   password: defaultpass
 
