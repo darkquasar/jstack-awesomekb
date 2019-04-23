@@ -42,7 +42,7 @@ authentication_backend:
   # production.
   ldap:
     # The url of the ldap server
-    url: '{{ printf "ldap://%s-openldap.%s.svc.cluster.local:389" (.Release.Name) (.Release.Namespace) }}'
+    url: '{{ printf "ldap://%s-openldap:389" (.Release.Name) }}'
 
   
     # The base dn for every entries
@@ -121,7 +121,7 @@ session:
   
   # The redis connection details
   redis:
-    host: '{{ printf "%s-redis-master.%s.svc.cluster.local" (.Release.Name) (.Release.Namespace) }}'
+    host: '{{ printf "%s-redis-master" (.Release.Name) }}'
     port: 6379
     password: defaultpass
 
@@ -150,7 +150,7 @@ storage:
   
   # Settings to connect to mongo server
   mongo:
-    url: '{{ printf "mongodb://%s-mongodb.%s.svc.cluster.local" (.Release.Name) (.Release.Namespace) }}'
+    url: '{{ printf "mongodb://%s-mongodb" (.Release.Name) }}'
     database: authelia
     auth:
       username: root
