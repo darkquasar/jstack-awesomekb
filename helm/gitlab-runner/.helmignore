@@ -19,6 +19,6 @@
 .project
 .idea/
 *.tmproj
-.vscode/
-# The Gitlab Runner Folder
-gitlabrunner/
+
+gitlab-runner*.tgz
+scripts/

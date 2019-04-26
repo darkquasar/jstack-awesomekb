@@ -5,6 +5,12 @@ Great articles on Kubernetes & Helm
 * Template your Templates: https://medium.com/tenable-techblog/how-tenable-uses-helm-to-template-a-microservice-stack-8c90ae445e48
 * Best Tips and Tricks (like using "tpl" and how complex charts with multiple dependencies are structuerd): https://github.com/helm/helm/blob/master/docs/charts_tips_and_tricks.md
 
+Troubleshooting
+===============
+
+* Pods cannot resolve external addresses: https://github.com/ubuntu/microk8s/issues/75 Essentially this might happen when the IP of the cluster node changes. Fixed with `sudo iptables -P FORWARD ACCEPT` (but this is not completely secure)
+* Get the endpoint of the Kubernetes API (private IP of the node): microk8s.kubectl get ep kubernetes
+
 Install Cert Manager
 ====================
 
