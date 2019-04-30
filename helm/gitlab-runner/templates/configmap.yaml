@@ -53,33 +53,6 @@ data:
     {{- if .Values.metrics.enabled }}
     listen_address = '[::]:9252'
     {{- end }}
-    [[runners]]
-      name = "RUNNER_NAME"
-      output_limit = 40960
-      url = "https://gitlab.com/ci"
-      token = "rwzkjdhssoA4ZGy_QQLr"
-      executor = "kubernetes"
-      [runners.kubernetes]
-        host = ""
-        image = "alpine:latest"
-        namespace = "namespace-a"
-        namespace_overwrite_allowed = ".*"
-        privileged = false
-        cpu_limit = "500m"
-        memory_limit = "4Gi"
-        service_cpu_limit = "250m"
-        service_memory_limit = "500Mi"
-        helper_cpu_limit = "250m"
-        helper_memory_limit = "1Gi"
-        cpu_request = "250m"
-        memory_request = "1Gi"
-        service_cpu_request = "100m"
-        service_memory_request = "250Mi"
-        helper_cpu_request = "100m"
-        helper_memory_request = "500Mi"
-        terminationGracePeriodSeconds = 90
-        service_account = "tiller"
-        service_account_overwrite_allowed = ".*"
   configure: |
     set -e
     cp /init-secrets/* /secrets
