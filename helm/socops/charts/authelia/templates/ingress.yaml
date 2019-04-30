@@ -26,8 +26,8 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ printf "%s-%s" (.Release.Name) "phpldapadmin" }}
-          servicePort: 1443
+          serviceName: {{ printf "%s-%s" (.Release.Name) "nginx" }}
+          servicePort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
